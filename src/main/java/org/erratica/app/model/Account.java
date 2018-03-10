@@ -14,7 +14,7 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idAcc;
+	private int idAccount;
 	private String nameAccount;
 	private String password;
 	private String respuestaSecreta;
@@ -40,12 +40,12 @@ public class Account {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public int getIdAcc() {
-		return idAcc;
+	public int getIdAccount() {
+		return idAccount;
 	}
 
-	public void setIdAcc(int idAcc) {
-		this.idAcc = idAcc;
+	public void setIdAccount(int idAccount) {
+		this.idAccount = idAccount;
 	}
 
 	public String getNameAccount() {
@@ -62,6 +62,13 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Account setFormatNameAccount() {
+		int nameLength = this.nameAccount.length();
+		String name = this.nameAccount.substring(0,1).toUpperCase()+this.nameAccount.substring(1,nameLength).toLowerCase();
+		this.setNameAccount(name);
+		return this;
 	}
 	
 }

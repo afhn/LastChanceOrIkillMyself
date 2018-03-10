@@ -7,8 +7,8 @@
 <%@page import="org.erratica.app.model.Progress"%>
 <%@page import="org.erratica.app.service.IProgress"%>
 <%@page import="org.erratica.app.service.IChampion"%>
-<%@page import="org.erratica.app.service.ProgressImplementation"%>
-<%@page import="org.erratica.app.service.ChampionImplementation"%>
+<%@page import="org.erratica.app.service.ProgressImpl"%>
+<%@page import="org.erratica.app.service.ChampionImpl"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +84,7 @@
 				<div class="col-md-6" style="height:100%; width:29%; background-color:black;">
 				
 					<div id="contenedorEliminarCuenta" style="text-align:right;margin-top:3%;">
-						<a href="${urlDeleteAcc}/${user.idAcc}" class="btn btn-danger btn-sm" role="button" title="Eliminar Cuenta"><span>Eliminar Cuenta</span></a>
+						<a href="${urlDeleteAcc}/${user.idAccount}" class="btn btn-danger btn-sm" role="button" title="Eliminar Cuenta"><span>Eliminar Cuenta</span></a>
 					</div>
 					
 					<div id="contenedorPerfil" style="margin:10% 5% 10% 5%; text-align:center;">

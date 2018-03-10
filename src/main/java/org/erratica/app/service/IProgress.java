@@ -6,9 +6,9 @@ import org.erratica.app.model.Progress;
 
 public interface IProgress {
 
-	public void insertQuery(Progress prog);
-	public Progress findById(int idProgress);
-	public List<Progress> findAllByIdChamp(int idChampion);
+	public void insertQuery(Progress progress);
+	public Progress findByIdQuery(int idProgress);
+	public List<Progress> findAllByIdChampQuery(int idChampion);
 	public void deleteQuery(int idProgress);
 	
 }
