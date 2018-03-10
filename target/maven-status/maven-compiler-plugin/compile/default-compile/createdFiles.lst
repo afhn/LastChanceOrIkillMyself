@@ -1,0 +1,16 @@
+org\erratica\app\model\Account.class
+org\erratica\app\service\AccountImplementation.class
+org\erratica\app\controller\AccountController.class
+org\erratica\app\repository\ChampionRepository.class
+org\erratica\app\repository\AccountRepository.class
+org\erratica\app\utils\MayusculaEditor.class
+org\erratica\app\service\IAccount.class
+org\erratica\app\repository\ProgressRepository.class
+org\erratica\app\model\Champion.class
+org\erratica\app\model\Progress.class
+org\erratica\app\service\IProgress.class
+org\erratica\app\controller\SessionController.class
+org\erratica\app\service\ChampionImplementation.class
+org\erratica\app\model\Enemy.class
+org\erratica\app\service\IChampion.class
+org\erratica\app\service\ProgressImplementation.class

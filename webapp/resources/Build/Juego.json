@@ -1,0 +1,13 @@
+{
+"companyName": "DefaultCompany",
+"productName": "ProjectWeb",
+"dataUrl": "Juego.data.unityweb",
+"asmCodeUrl": "Juego.asm.code.unityweb",
+"asmMemoryUrl": "Juego.asm.memory.unityweb",
+"asmFrameworkUrl": "Juego.asm.framework.unityweb",
+"TOTAL_MEMORY": 268435456,
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
