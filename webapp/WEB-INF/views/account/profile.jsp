@@ -25,7 +25,7 @@
 		<spring:url value="/" var="urlRoot"/>
 		<spring:url value="/home" var="urlHome"/>
 		<spring:url value="/account/profile" var="urlProfile"/>
-		<spring:url value="/account/deleteAcc" var="urlDeleteAcc"/>
+		<spring:url value="/account/deleteAccount" var="urlDeleteAcc"/>
 		<spring:url value="/account/newGame" var="urlNewGame"/>
 		<spring:url value="/account/deleteGame" var="urlDeleteGame"/>
 		<spring:url value="/account/championProgress" var ="urlProgressDetal"/>
@@ -84,16 +84,16 @@
 				<div class="col-md-6" style="height:100%; width:29%; background-color:black;">
 				
 					<div id="contenedorEliminarCuenta" style="text-align:right;margin-top:3%;">
-						<a href="${urlDeleteAcc}/${user.idAccount}" class="btn btn-danger btn-sm" role="button" title="Eliminar Cuenta"><span>Eliminar Cuenta</span></a>
+						<a href="${urlDeleteAcc}?idAccount=${user.idAccount}" class="btn btn-danger btn-sm" role="button" title="Eliminar Cuenta"><span>Eliminar Cuenta</span></a>
 					</div>
 					
 					<div id="contenedorPerfil" style="margin:10% 5% 10% 5%; text-align:center;">
 						<%
-							Account acc = (Account)request.getAttribute("user");
-							String dateAcc = acc.getFechaCreacion().toString().substring(0, 10);
+							Account account = (Account)request.getAttribute("user");
+							String dateAccount = account.getFechaCreacion().toString().substring(0, 10);
 						%>
-						<p style="font-size: 1.5vw;">${usuario.nameAccount}</p>  
-						<p style="font-size: 1.2vw;">Fecha de creación: <%=dateAcc%>.</p>
+						<p style="font-size: 1.5vw;">${user.nameAccount}</p>  
+						<p style="font-size: 1.2vw;">Fecha de creación: <%=dateAccount%>.</p>
 						<p style="font-size: 1.2vw;">Número de personajes: ${nChampions} activos.</p>
 					</div>
 					
@@ -102,17 +102,17 @@
 						<a class="btn btn-success btn-sm" role="button" title="Personaje nuevo" data-toggle="modal" data-target="#myModal" id="newChamp"><span>Personaje nuevo</span></a>
 						<div class="tab-content">
 							<table>
-								<c:forEach var="champions" items="${champions}">
+								<c:forEach var="championList" items="${championList}">
 									<tr>
-										<td>${champions.championName}</td>
-										<td><a href="${urlProgressDetal}?idChamp=${champions.id}" class="btn btn-success btn-sm" role="button" id="progressDetail" title="Partida Nueva"><span>Progreso</span></a></td>
-										<td><a href="${urlDeleteChamp}?idChamp=${champions.id}" class="btn btn-success btn-sm" role="button" id="deleteChamp" title="Partida Nueva"><span>Eliminar</span></a></td>
+										<td>${championList.championName}</td>
+										<td><a href="${urlProgressDetal}?idChamp=${championList.id}" class="btn btn-success btn-sm" role="button" id="progressDetail" title="Partida Nueva"><span>Progreso</span></a></td>
+										<td><a href="${urlDeleteChamp}?idChamp=${championList.id}" class="btn btn-success btn-sm" role="button" id="deleteChamp" title="Partida Nueva"><span>Eliminar</span></a></td>
 									</tr>	
 								</c:forEach>
 							</table>
 						</div>
 					</div>
-					<!-- Modal -->
+					
 					<div class="modal fade" id="myModal" role="dialog">
 					    <div class="modal-dialog">
 						    <div class="modal-content" style="width:68%;">
@@ -124,6 +124,7 @@
 						    </div>
 						</div>
 					</div>
+					
 				</div>
 				
 			</div>

@@ -9,34 +9,29 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/")
 public class SessionController {
 	
-	//Implementación de la clase Account y sus métodos.
 	@Autowired
 	private IAccount accountImpl;
 	
-	//Variable de clase de sesión para mantener el login.
-	private int accountIdSesion;
-	private Account account;
-	
-	//Carga de la página principal, la de LogIn.
+	private int accountIdSesion; //Variable de sesión para mantener el LogIn
+
 	@GetMapping(value = "/")
 	public String login() {
-		accountIdSesion = 0;
+		accountIdSesion = 0; //Reseteo de la variable de sesión al cerrar LogIn
 		return "login";
 	}
-	
-	//Carga de la página de registro a través de un href que hay en la página de LogIn.
+
 	@GetMapping(value = "/register")
 	public String registro() {
-		accountIdSesion = 0;
+		accountIdSesion = 0; //Reseteo de la variable por si queda algún rastro.
 		return "register";
 	}
 	
-	//Método get para volver al home cuando se quiera volver.
 	@GetMapping(value="/home")
 	public String home(Model model) {
 		model.addAttribute("user",accountImpl.findByIdQuery(accountIdSesion).setFormatNameAccount());
@@ -46,43 +41,46 @@ public class SessionController {
 	//Método post que guarda una cuenta al darle al botón de registrar en la página de registro.
 	@PostMapping(value = "/save")
 	public String save(Account account_BindingData, Model model, BindingResult errors) {
-		String nameAccountFormated = account_BindingData.getNameAccount().toUpperCase();
-		if(accountImpl.findBynameAccountQuery(nameAccountFormated)==null) {
-			account_BindingData.setNameAccount(nameAccountFormated);
+		//Formateo a Mayus del nombre del acc de Binding Data ya que en la BBDD se guarda en mayus.
+		String nameAccountFormatUpper = account_BindingData.getNameAccount().toUpperCase();
+		if(accountImpl.findBynameAccountQuery(nameAccountFormatUpper)==null) {
+			//Antes de guardar la cuenta en la BBDD se formatea para guardarla en mayus.
+			account_BindingData.setNameAccount(nameAccountFormatUpper);
 			accountImpl.insertQuery(account_BindingData);
-			accountIdSesion = accountImpl.findBynameAccountQuery(nameAccountFormated).getIdAccount();
-			account = accountImpl.findBynameAccountQuery(nameAccountFormated);
-			account.setFormatNameAccount();
-			model.addAttribute("user",account);
-			return "home";
+			//Se guarda la id como variable de sesión.
+			accountIdSesion = accountImpl.findBynameAccountQuery(nameAccountFormatUpper).getIdAccount();
+			//Se pasa la cuenta al modelo.
+			model.addAttribute("user", accountImpl.findBynameAccountQuery(nameAccountFormatUpper).setFormatNameAccount());
+			return "redirect:/home";
 		}else
 			return "redirect:/register";
 	}
 	
-	
 	//Método post que carga la página de home a través del login.
 	@PostMapping(value = "/home")
 	public String home(Model model, Account account_BindingData) {
-		String nameAccountFormated = account_BindingData.getNameAccount().toUpperCase();
-		if(accountImpl.findBynameAccountQuery(nameAccountFormated) != null) {
-			if(account_BindingData.getPassword().equals(accountImpl.findBynameAccountQuery(nameAccountFormated).getPassword())) {
-				accountIdSesion = accountImpl.findBynameAccountQuery(nameAccountFormated).getIdAccount();
-				account_BindingData.setFormatNameAccount();
-				account = accountImpl.findBynameAccountQuery(nameAccountFormated);
-				model.addAttribute("user",account);
-				return "home";
-			}else 
-				return "redirect:/";
+		//Formateo a Mayus del nombre del acc de Binding Data ya que en la BBDD se guarda en mayus.
+		String nameAccountFormatUpper = account_BindingData.getNameAccount().toUpperCase();
+		if(accountImpl.passwordAndAccountVerifyQuery(account_BindingData)) {
+			//Se guarda la id como variable de sesión.
+			accountIdSesion = accountImpl.findBynameAccountQuery(nameAccountFormatUpper).getIdAccount();
+			//Se pasa la cuenta de registro al modelo.
+			model.addAttribute("user",accountImpl.findBynameAccountQuery(nameAccountFormatUpper).setFormatNameAccount());
+			return "home";
 		}else 
 			return "redirect:/";
 	}
+	
+	//MÉTODO PARA BORRAR CUENTA Y REDIRIGIR AL LOGIN
+	@GetMapping(value="/account/deleteAccount")
+	public String deleteAccount(@RequestParam("idAccount") int idAccount) {
+		accountImpl.deleteQuery(idAccount);
+		return "redirect:/";
+	}
 
+	//Método get para acceder a la id de sesión desde cualquier clase.
 	public int getIdSesion() {
 		return accountIdSesion;
-	}
-	
-	public Account getAccount() {
-		return account;
 	}
 
 }

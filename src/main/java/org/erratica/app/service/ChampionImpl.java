@@ -38,4 +38,9 @@ public class ChampionImpl implements IChampion{
 		return (championRepository.findById(idChampion).isPresent())?championRepository.findById(idChampion).get():null;
 	}
 
+	@Override
+	public Champion findBychampionName(String championName) {
+		return (championRepository.findBychampionName(championName).isPresent())?championRepository.findBychampionName(championName).get():null;
+	}
+
 }

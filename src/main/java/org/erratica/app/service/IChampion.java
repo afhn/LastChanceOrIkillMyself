@@ -10,4 +10,5 @@ public interface IChampion {
 	public List<Champion> findByidAccountQuery(int idAccount);
 	public void deleteByIdQuery(int idChampion);
 	public Champion findByIdQuery(int idChampion);
+	public Champion findBychampionName(String championName);
 }

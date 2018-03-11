@@ -22,6 +22,17 @@ public class Champion {
 	private int level;
 	private int idAccount;
 	
+	public Champion(String championName, int idAccount) {
+		this.championName = championName;
+		this.idAccount = idAccount;
+		this.attackDamage = 5;
+		this.defense = 0;
+		this.healthPoints = 200;
+		this.mana = 100;
+		this.experience=0;
+		this.level=1;
+	}
+	
 	public Champion() {
 		this.attackDamage = 5;
 		this.defense = 0;
@@ -30,7 +41,7 @@ public class Champion {
 		this.experience=0;
 		this.level=1;
 	}
-
+	
 	public String getChampionName() {
 		return championName;
 	}

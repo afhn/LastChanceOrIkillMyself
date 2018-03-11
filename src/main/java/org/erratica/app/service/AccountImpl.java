@@ -21,9 +21,7 @@ public class AccountImpl implements IAccount {
 		if(existsByIdQuery(idAccount)) {
 			accountRepository.deleteById(idAccount);
 			return 1;
-		}else {
-			return 0;
-		}		
+		}else return 0;	
 	}
 
 	@Override
@@ -39,6 +37,11 @@ public class AccountImpl implements IAccount {
 	@Override
 	public Account findBynameAccountQuery(String accountName) {
 		return (accountRepository.findBynameAccount(accountName).isPresent())?accountRepository.findBynameAccount(accountName).get():null;
+	}
+
+	@Override//Método para verificar si existe una coincidencia de un nombre y una pass en la base de datos.
+	public boolean passwordAndAccountVerifyQuery(Account account) {
+		return (accountRepository.findBynameAccountAndPassword(account.getNameAccount(), account.getPassword()).isPresent())?true:false;
 	}
 
 }

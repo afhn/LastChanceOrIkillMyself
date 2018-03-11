@@ -64,10 +64,11 @@ public class Account {
 		this.password = password;
 	}
 	
+	//No recuerdo cómo funcionaba, pero mola.
 	public Account setFormatNameAccount() {
-		int nameLength = this.nameAccount.length();
-		String name = this.nameAccount.substring(0,1).toUpperCase()+this.nameAccount.substring(1,nameLength).toLowerCase();
-		this.setNameAccount(name);
+		int nameLength = nameAccount.length();
+		String name = nameAccount.substring(0,1).toUpperCase()+nameAccount.substring(1,nameLength).toLowerCase();
+		setNameAccount(name);
 		return this;
 	}
 	

@@ -18,6 +18,13 @@ public class Progress {
 	private String time;
 	private int idChamp;
 	
+	public Progress(String map, String levelMap, String time, int idChamp) {
+		this.map=map;
+		this.levelMap=levelMap;
+		this.time=time;
+		this.idChamp=idChamp;
+	}
+	
 	public Progress() {
 		this.map="";
 		this.levelMap="";
